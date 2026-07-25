@@ -269,7 +269,25 @@
             });
 
             document.getElementById("btnCalcDemoHome").addEventListener("click", function() {
-                document.getElementById("calCalcResultHome").classList.remove("d-none");
+                const name = document.getElementById("calNameHome").value.trim() || "Rau củ";
+                const weightVal = parseFloat(document.getElementById("calWeightHome").value) || 0;
+                
+                const lowerName = name.toLowerCase();
+                let calPerGram = 0.3; // default rate
+                if (lowerName.includes("cà chua") || lowerName.includes("tomato")) {
+                    calPerGram = 0.18;
+                } else if (lowerName.includes("bông cải") || lowerName.includes("broccoli") || lowerName.includes("súp lơ")) {
+                    calPerGram = 0.34;
+                } else if (lowerName.includes("khoai tây") || lowerName.includes("potato")) {
+                    calPerGram = 0.77;
+                } else if (lowerName.includes("cà rốt") || lowerName.includes("carrot")) {
+                    calPerGram = 0.41;
+                }
+                
+                const calResult = Math.round(weightVal * calPerGram);
+                const resultBox = document.getElementById("calCalcResultHome");
+                resultBox.innerHTML = `<strong>${weightVal}g ${name}</strong> chứa khoảng <strong>${calResult} Calo</strong>`;
+                resultBox.classList.remove("d-none");
             });
         });
     </script>
