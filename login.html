@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đăng nhập / Đăng ký - VEG-AI</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="assets/css/style.css" rel="stylesheet">
+</head>
+<body class="d-flex align-items-center justify-content-center min-vh-100 py-5" style="background-color: var(--bg-light);">
+
+    <div class="container">
+        <div class="card card-premium overflow-hidden border-0 shadow-lg mx-auto" style="max-width: 960px;">
+            <div class="row g-0">
+                <!-- Banner Column -->
+                <div class="col-lg-6 d-none d-lg-flex flex-column justify-content-between p-5 text-white" 
+                     style="background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%); min-height: 520px;">
+                    <div>
+                        <a href="index.html" class="d-flex align-items-center gap-2 text-white text-decoration-none fw-bold fs-4">
+                            <i class="bi bi-camera-fill"></i>
+                            <span>VEG-AI</span>
+                        </a>
+                    </div>
+                    <div class="my-auto py-5">
+                        <h2 class="display-6 fw-bold mb-3">Nhận diện Rau củ Thông minh</h2>
+                        <p class="lead opacity-75">
+                            Trải nghiệm hệ thống đếm kho hàng tự động và phân tích chỉ số calo dinh dưỡng bằng công nghệ AI tiên tiến nhất.
+                        </p>
+                    </div>
+                    <div>
+                        <small class="opacity-50">&copy; 2026 VEG-AI. All rights reserved.</small>
+                    </div>
+                </div>
+
+                <!-- Form Column -->
+                <div class="col-lg-6 p-4 p-md-5 bg-white">
+                    <!-- Segmented Form Select -->
+                    <div class="d-flex justify-content-center mb-4">
+                        <div class="nav nav-pills bg-light p-1 rounded-pill" id="auth-tab" role="tablist">
+                            <button class="nav-link active rounded-pill px-4" id="login-tab-btn" data-bs-toggle="pill" data-bs-target="#login-panel" type="button">Đăng nhập</button>
+                            <button class="nav-link rounded-pill px-4" id="register-tab-btn" data-bs-toggle="pill" data-bs-target="#register-panel" type="button">Đăng ký</button>
+                        </div>
+                    </div>
+
+                    <div class="tab-content" id="auth-tabContent">
+                        <!-- LOGIN PANEL -->
+                        <div class="tab-pane fade show active" id="login-panel" role="tabpanel">
+                            <h3 class="fw-bold mb-4">Mừng bạn quay trở lại</h3>
+                            <form id="loginForm">
+                                <div class="mb-3">
+                                    <label for="loginEmail" class="form-label fw-bold">Email</label>
+                                    <input type="email" class="form-control rounded-3" id="loginEmail" placeholder="user@gmail.com hoặc enterprise@gmail.com" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="loginPassword" class="form-label fw-bold">Mật khẩu</label>
+                                    <div class="input-group">
+                                        <input type="password" class="form-control rounded-start-3" id="loginPassword" placeholder="Mật khẩu" required>
+                                        <button class="btn btn-outline-secondary rounded-end-3 toggle-password-btn" type="button">
+                                            <i class="bi bi-eye"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <button type="submit" class="btn btn-success w-100 py-3 rounded-pill fw-bold mt-3 shadow-md">Đăng nhập</button>
+                            </form>
+                        </div>
+
+                        <!-- REGISTER PANEL -->
+                        <div class="tab-pane fade" id="register-panel" role="tabpanel">
+                            <h3 class="fw-bold mb-3">Tạo tài khoản mới</h3>
+                            
+                            <!-- Role Switcher -->
+                            <div class="mb-3">
+                                <label class="form-label fw-bold d-block">Loại tài khoản</label>
+                                <div class="btn-group w-100" role="group">
+                                    <input type="radio" class="btn-check" name="regRole" id="regRoleUser" value="user" checked>
+                                    <label class="btn btn-outline-success py-2 rounded-start-pill" for="regRoleUser">Cá nhân</label>
+                                    <input type="radio" class="btn-check" name="regRole" id="regRoleEnterprise" value="enterprise">
+                                    <label class="btn btn-outline-success py-2 rounded-end-pill" for="regRoleEnterprise">Doanh nghiệp</label>
+                                </div>
+                            </div>
+
+                            <form id="registerForm">
+                                <div class="mb-2">
+                                    <label for="regName" class="form-label fw-bold">Họ và Tên / Tên liên hệ</label>
+                                    <input type="text" class="form-control rounded-3" id="regName" placeholder="Nhập tên của bạn" required>
+                                </div>
+                                <div class="mb-2">
+                                    <label for="regEmail" class="form-label fw-bold">Email</label>
+                                    <input type="email" class="form-control rounded-3" id="regEmail" placeholder="example@gmail.com" required>
+                                </div>
+                                <div class="mb-2">
+                                    <label for="regPassword" class="form-label fw-bold">Mật khẩu</label>
+                                    <div class="input-group">
+                                        <input type="password" class="form-control rounded-start-3" id="regPassword" placeholder="Mật khẩu" required>
+                                        <button class="btn btn-outline-secondary rounded-end-3 toggle-password-btn" type="button">
+                                            <i class="bi bi-eye"></i>
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <!-- Enterprise Additional Fields (Hidden by default) -->
+                                <div id="enterpriseFields" class="d-none border-top pt-2 mt-2">
+                                    <div class="mb-2">
+                                        <label for="regCompany" class="form-label fw-bold text-success">Tên doanh nghiệp</label>
+                                        <input type="text" class="form-control rounded-3 border-success" id="regCompany" placeholder="Tên công ty hoặc cửa hàng">
+                                    </div>
+                                    <div class="mb-2">
+                                        <label for="regTax" class="form-label fw-bold text-success">Mã số thuế</label>
+                                        <input type="text" class="form-control rounded-3 border-success" id="regTax" placeholder="Nhập mã số thuế">
+                                    </div>
+                                    <div class="mb-2">
+                                        <label for="regAddress" class="form-label fw-bold text-success">Địa chỉ kho hàng</label>
+                                        <input type="text" class="form-control rounded-3 border-success" id="regAddress" placeholder="Địa chỉ chi tiết kho hàng">
+                                    </div>
+                                </div>
+
+                                <button type="submit" class="btn btn-success w-100 py-3 rounded-pill fw-bold mt-3 shadow-md">Đăng ký tài khoản</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/app.js"></script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const queryRole = urlParams.get("role");
+            if (queryRole === "user") {
+                document.getElementById("loginEmail").value = "user@gmail.com";
+            } else if (queryRole === "enterprise") {
+                document.getElementById("loginEmail").value = "enterprise@gmail.com";
+            }
+
+            // Toggle Password View Icon
+            const pwdToggleBtns = document.querySelectorAll(".toggle-password-btn");
+            pwdToggleBtns.forEach(btn => {
+                btn.addEventListener("click", () => {
+                    const input = btn.previousElementSibling;
+                    const icon = btn.querySelector("i");
+                    if (input.type === "password") {
+                        input.type = "text";
+                        icon.classList.replace("bi-eye", "bi-eye-slash");
+                    } else {
+                        input.type = "password";
+                        icon.classList.replace("bi-eye-slash", "bi-eye");
+                    }
+                });
+            });
+
+            // Toggle Enterprise Registration Extra Fields
+            const regRoleUser = document.getElementById("regRoleUser");
+            const regRoleEnterprise = document.getElementById("regRoleEnterprise");
+            const enterpriseFields = document.getElementById("enterpriseFields");
+            
+            regRoleUser.addEventListener("change", () => {
+                enterpriseFields.classList.add("d-none");
+            });
+            regRoleEnterprise.addEventListener("change", () => {
+                enterpriseFields.classList.remove("d-none");
+            });
+
+            // Handle Login Form
+            const loginForm = document.getElementById("loginForm");
+            loginForm.addEventListener("submit", (e) => {
+                e.preventDefault();
+                const email = document.getElementById("loginEmail").value.toLowerCase();
+                
+                // Static role selection helper based on email string
+                const role = email.includes("enterprise") ? "enterprise" : "user";
+                localStorage.setItem("userRole", role);
+                window.location.href = "/loading.html";
+            });
+
+            // Handle Register Form
+            const registerForm = document.getElementById("registerForm");
+            registerForm.addEventListener("submit", (e) => {
+                e.preventDefault();
+                const role = document.querySelector('input[name="regRole"]:checked').value;
+                localStorage.setItem("userRole", role);
+                window.location.href = "/loading.html";
+            });
+        });
+    </script>
+
+</body>
+</html>

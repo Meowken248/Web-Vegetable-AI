@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trợ lý Dinh dưỡng AI - VEG-AI</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="../assets/css/style.css" rel="stylesheet">
+</head>
+<body>
+
+    <div class="app-wrapper">
+        <!-- Sidebar Navigation Drawer -->
+        <aside class="sidebar">
+            <div class="sidebar-header d-flex align-items-center gap-2">
+                <i class="bi bi-camera-fill fs-4 text-success"></i>
+                <span class="fw-bold small">VEG-AI PERSONAL</span>
+            </div>
+            <div class="sidebar-menu">
+                <a href="../user/dashboard.html" class="sidebar-link"><i class="bi bi-grid-1x2"></i>Tổng quan dinh dưỡng</a>
+                <a href="../index.html#demo-scan" class="sidebar-link"><i class="bi bi-camera"></i>Nhận diện AI</a>
+                <a href="../user/reports.html" class="sidebar-link"><i class="bi bi-journal-text"></i>Bữa ăn hàng ngày</a>
+                <a href="../user/recipes.html" class="sidebar-link"><i class="bi bi-search"></i>Trợ lý ẩm thực</a>
+                <a href="../user/chat.html" class="sidebar-link active"><i class="bi bi-chat-dots"></i>AI Chuyên gia</a>
+                <hr>
+                <a href="#" class="sidebar-link btn-logout-trigger"><i class="bi bi-box-arrow-right"></i>Đăng xuất</a>
+            </div>
+        </aside>
+
+        <!-- Main Panel Content -->
+        <div class="main-content d-flex flex-column" style="height: 100vh;">
+            <header class="top-navbar">
+                <button class="btn d-lg-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#mobileSidebar">
+                    <i class="bi bi-list fs-3"></i>
+                </button>
+                <h4 class="fw-bold text-success mb-0 d-none d-sm-block">AI Chuyên Gia Dinh Dưỡng</h4>
+                <div class="dropdown">
+                    <button class="btn d-flex align-items-center gap-2 dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                        <div class="rounded-circle bg-success text-white d-flex align-items-center justify-content-center" style="width: 38px; height: 38px;">
+                            <i class="bi bi-person-fill"></i>
+                        </div>
+                        <div class="text-start d-none d-sm-block">
+                            <div class="fw-bold small current-username">Người Dùng Cá Nhân</div>
+                            <div class="text-muted small" style="font-size: 0.75rem;">Cá nhân</div>
+                        </div>
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end shadow border-0 mt-2">
+                        <li><a class="dropdown-item" href="#"><i class="bi bi-person me-2"></i>Hồ sơ</a></li>
+                        <li><a class="dropdown-item" href="#"><i class="bi bi-gear me-2"></i>Cài đặt</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item btn-logout-trigger" href="#"><i class="bi bi-box-arrow-right me-2"></i>Đăng xuất</a></li>
+                    </ul>
+                </div>
+            </header>
+
+            <!-- Chat panel -->
+            <main class="content-body d-flex flex-column flex-grow-1 overflow-hidden p-3 p-md-4">
+                <div class="card card-premium d-flex flex-column flex-grow-1 overflow-hidden" style="max-height: 100%;">
+                    
+                    <!-- Chat Header -->
+                    <div class="p-3 border-bottom d-flex align-items-center gap-3 bg-light">
+                        <div class="rounded-circle bg-success text-white d-flex align-items-center justify-content-center" style="width: 45px; height: 45px;">
+                            <i class="bi bi-robot fs-4"></i>
+                        </div>
+                        <div>
+                            <h6 class="fw-bold mb-0">Dr. Veggie AI</h6>
+                            <small class="text-success d-flex align-items-center gap-1">
+                                <span class="d-inline-block rounded-circle bg-success" style="width: 8px; height: 8px;"></span> đang trực tuyến
+                            </small>
+                        </div>
+                    </div>
+
+                    <!-- Chat Threads Box -->
+                    <div id="chatBox" class="chat-box flex-grow-1 overflow-y-auto bg-light bg-opacity-50">
+                        <div class="chat-bubble ai">
+                            Xin chào! Tôi là Chuyên gia dinh dưỡng AI của bạn. Bạn muốn tôi tư vấn thực đơn hay giải đáp thắc mắc nào hôm nay?
+                        </div>
+                        <div class="chat-bubble user">
+                            Vitamin C có nhiều trong các loại rau quả nào hả bác sĩ?
+                        </div>
+                        <div class="chat-bubble ai">
+                            Vitamin C chứa hàm lượng rất dồi dào trong các loại quả có múi (cam, quýt, bưởi), bông cải xanh, ớt chuông đỏ, dâu tây và cà chua tươi chín nhé bạn!
+                        </div>
+                    </div>
+
+                    <!-- Suggestion Chips Row -->
+                    <div class="px-3 py-2 border-top bg-white d-flex flex-wrap gap-2">
+                        <button class="btn btn-sm btn-outline-success rounded-pill chat-chip">Thực đơn giảm calo</button>
+                        <button class="btn btn-sm btn-outline-success rounded-pill chat-chip">Vitamin có trong cà chua</button>
+                        <button class="btn btn-sm btn-outline-success rounded-pill chat-chip">Lượng calo súp lơ xanh</button>
+                    </div>
+
+                    <!-- Input Actions Panel -->
+                    <div class="p-3 border-top bg-white">
+                        <form id="chatForm">
+                            <div class="input-group">
+                                <button class="btn btn-outline-secondary rounded-start-pill px-3" type="button" disabled>
+                                    <i class="bi bi-image fs-5"></i>
+                                </button>
+                                <input type="text" id="chatInput" class="form-control py-2.5" placeholder="Hỏi chuyên gia dinh dưỡng... (Bản quét tĩnh)">
+                                <button type="submit" class="btn btn-success rounded-end-pill px-4 fw-bold"><i class="bi bi-send-fill"></i></button>
+                            </div>
+                        </form>
+                    </div>
+
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- Mobile Navigation Drawer -->
+    <div class="offcanvas offcanvas-start" tabindex="-1" id="mobileSidebar" aria-labelledby="mobileSidebarLabel">
+        <div class="offcanvas-header border-bottom">
+            <h5 class="offcanvas-title fw-bold" id="mobileSidebarLabel" style="color: var(--primary);">VEG-AI</h5>
+            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body p-0">
+            <div class="sidebar" style="width: 100%; border: none;">
+                <div class="sidebar-header d-flex align-items-center gap-2">
+                    <i class="bi bi-camera-fill fs-4 text-success"></i>
+                    <span class="fw-bold small">VEG-AI PERSONAL</span>
+                </div>
+                <div class="sidebar-menu">
+                    <a href="../user/dashboard.html" class="sidebar-link"><i class="bi bi-grid-1x2"></i>Tổng quan dinh dưỡng</a>
+                    <a href="../index.html#demo-scan" class="sidebar-link"><i class="bi bi-camera"></i>Nhận diện AI</a>
+                    <a href="../user/reports.html" class="sidebar-link"><i class="bi bi-journal-text"></i>Bữa ăn hàng ngày</a>
+                    <a href="../user/recipes.html" class="sidebar-link"><i class="bi bi-search"></i>Trợ lý ẩm thực</a>
+                    <a href="../user/chat.html" class="sidebar-link active"><i class="bi bi-chat-dots"></i>AI Chuyên gia</a>
+                    <hr>
+                    <a href="#" class="sidebar-link btn-logout-trigger"><i class="bi bi-box-arrow-right"></i>Đăng xuất</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../assets/js/app.js"></script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const chatBox = document.getElementById("chatBox");
+            const chatForm = document.getElementById("chatForm");
+            const chatInput = document.getElementById("chatInput");
+
+            // Simple mock message append simulation
+            chatForm.addEventListener("submit", (e) => {
+                e.preventDefault();
+                const text = chatInput.value.trim();
+                if (text === "") return;
+
+                // Append user message
+                const userBubble = document.createElement("div");
+                userBubble.className = "chat-bubble user";
+                userBubble.textContent = text;
+                chatBox.appendChild(userBubble);
+                chatInput.value = "";
+                chatBox.scrollTop = chatBox.scrollHeight;
+
+                // Append mock doctor reply
+                setTimeout(() => {
+                    const docBubble = document.createElement("div");
+                    docBubble.className = "chat-bubble ai";
+                    docBubble.textContent = "Cảm ơn bạn đã đặt câu hỏi. Đây là phiên bản giao diện mẫu. Để thảo luận sâu hơn, hãy đặt lịch hẹn tư vấn thực tế nhé!";
+                    chatBox.appendChild(docBubble);
+                    chatBox.scrollTop = chatBox.scrollHeight;
+                }, 800);
+            });
+
+            // Make chips clickable to populate search input
+            document.querySelectorAll(".chat-chip").forEach(chip => {
+                chip.addEventListener("click", () => {
+                    chatInput.value = chip.textContent;
+                });
+            });
+        });
+    </script>
+</body>
+</html>

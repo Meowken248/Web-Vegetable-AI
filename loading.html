@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đang tải hệ thống - VEG-AI</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="assets/css/style.css" rel="stylesheet">
+</head>
+<body class="d-flex align-items-center justify-content-center min-vh-100" style="background-color: var(--bg-light);">
+
+    <div class="text-center p-4" style="max-width: 420px; width: 100%;">
+        <!-- Brand Logo Icon -->
+        <div class="d-inline-flex p-4 rounded-circle bg-success bg-opacity-10 text-success mb-4">
+            <i class="bi bi-camera-fill display-3"></i>
+        </div>
+
+        <h3 class="fw-bold mb-1" style="color: var(--primary);">VEG-AI SYSTEM</h3>
+        <p class="text-muted mb-4 small">TRÍ TUỆ NHÂN TẠO NHẬN DIỆN RAU CỦ QUẢ</p>
+
+        <!-- Spinner & Bar -->
+        <div class="mb-4">
+            <div class="spinner-border text-success mb-3" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+            <div class="progress rounded-pill bg-success bg-opacity-10" style="height: 8px;">
+                <div id="loadingBar" class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" style="width: 0%;"></div>
+            </div>
+        </div>
+
+        <p id="loadingTagline" class="fw-500 text-secondary" style="min-height: 24px;">Đang kết nối hệ thống...</p>
+    </div>
+
+    <!-- Bootstrap JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/app.js"></script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const role = localStorage.getItem("userRole") || "user";
+            const loadingBar = document.getElementById("loadingBar");
+            const loadingTagline = document.getElementById("loadingTagline");
+
+            const taglines = [
+                { progress: 0, text: "Đang khởi tạo camera và cảm biến AI..." },
+                { progress: 25, text: "Đang tải mô hình mạng nơ-ron nhận dạng..." },
+                { progress: 55, text: "Đang nạp cơ sở dữ liệu dinh dưỡng..." },
+                { progress: 80, text: "Đang thiết lập cấu hình giao diện..." },
+                { progress: 100, text: "Đang truy cập tài khoản..." }
+            ];
+
+            let currentProgress = 0;
+            const duration = 2000; 
+            const intervalTime = 50; 
+            const step = 100 / (duration / intervalTime);
+
+            const timer = setInterval(() => {
+                currentProgress += step;
+                if (currentProgress >= 100) {
+                    currentProgress = 100;
+                    clearInterval(timer);
+                    
+                    setTimeout(() => {
+                        if (role === "enterprise") {
+                            window.location.href = "/enterprise/dashboard.html";
+                        } else {
+                            window.location.href = "/user/dashboard.html";
+                        }
+                    }, 200);
+                }
+
+                loadingBar.style.width = currentProgress + "%";
+
+                let activeText = taglines[0].text;
+                for (let i = 0; i < taglines.length; i++) {
+                    if (currentProgress >= taglines[i].progress) {
+                        activeText = taglines[i].text;
+                    }
+                }
+                loadingTagline.textContent = activeText;
+            }, intervalTime);
+        });
+    </script>
+</body>
+</html>

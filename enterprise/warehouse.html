@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quản lý Kho - VEG-AI</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="../assets/css/style.css" rel="stylesheet">
+</head>
+<body>
+
+    <div class="app-wrapper">
+        <!-- Sidebar Navigation Drawer -->
+        <aside class="sidebar enterprise-theme">
+            <div class="sidebar-header d-flex align-items-center gap-2">
+                <i class="bi bi-camera-fill fs-4 text-success"></i>
+                <span class="fw-bold small text-success">VEG-AI ENTERPRISE</span>
+            </div>
+            <div class="sidebar-menu">
+                <a href="../enterprise/dashboard.html" class="sidebar-link"><i class="bi bi-grid-1x2"></i>Tổng quan</a>
+                <a href="../enterprise/inventory-scan.html" class="sidebar-link"><i class="bi bi-qr-code-scan"></i>Kiểm kê Webcam</a>
+                <a href="../enterprise/warehouse.html" class="sidebar-link active"><i class="bi bi-box-seam"></i>Quản lý Kho</a>
+                <a href="../enterprise/stock-transactions.html" class="sidebar-link"><i class="bi bi-arrow-down-up"></i>Nhập / Xuất kho</a>
+                <a href="../index.html#demo-scan" class="sidebar-link"><i class="bi bi-camera"></i>Nhận diện AI</a>
+                <hr style="border-color: #2d3c30;">
+                <a href="#" class="sidebar-link btn-logout-trigger"><i class="bi bi-box-arrow-right"></i>Đăng xuất</a>
+            </div>
+        </aside>
+
+        <!-- Main Panel Content -->
+        <div class="main-content">
+            <header class="top-navbar enterprise-theme">
+                <button class="btn d-lg-none text-white" type="button" data-bs-toggle="offcanvas" data-bs-target="#mobileSidebar">
+                    <i class="bi bi-list fs-3"></i>
+                </button>
+                <h4 class="fw-bold text-success mb-0 d-none d-sm-block">Danh Mục Hàng Hóa Tồn Kho</h4>
+                <div class="dropdown">
+                    <button class="btn d-flex align-items-center gap-2 dropdown-toggle text-white" type="button" data-bs-toggle="dropdown">
+                        <div class="rounded-circle bg-success text-white d-flex align-items-center justify-content-center" style="width: 38px; height: 38px;">
+                            <i class="bi bi-building"></i>
+                        </div>
+                        <div class="text-start d-none d-sm-block">
+                            <div class="fw-bold small current-username">Green Warehouse Co</div>
+                            <div class="text-muted small" style="font-size: 0.75rem;"><span class="current-role">Doanh nghiệp</span></div>
+                        </div>
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end shadow border-0 mt-2">
+                        <li><a class="dropdown-item" href="#"><i class="bi bi-person me-2"></i>Hồ sơ</a></li>
+                        <li><a class="dropdown-item" href="#"><i class="bi bi-gear me-2"></i>Cài đặt</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item btn-logout-trigger" href="#"><i class="bi bi-box-arrow-right me-2"></i>Đăng xuất</a></li>
+                    </ul>
+                </div>
+            </header>
+
+            <main class="content-body">
+                <div class="card card-premium p-4">
+                    <!-- Title and header button -->
+                    <div class="d-flex flex-wrap justify-content-between align-items-center mb-4 gap-3">
+                        <div>
+                            <h3 class="fw-bold mb-1">Quản lý Danh mục Kho hàng</h3>
+                            <p class="text-muted mb-0 small">Danh sách toàn bộ các loại rau củ đang được lưu trữ tại kho bãi.</p>
+                        </div>
+                        <button type="button" class="btn btn-success rounded-pill px-4 fw-bold shadow-md" data-bs-toggle="modal" data-bs-target="#addProductModal">
+                            <i class="bi bi-plus-lg me-1"></i> Thêm sản phẩm
+                        </button>
+                    </div>
+
+                    <!-- Search and filters -->
+                    <div class="row g-3 mb-4">
+                        <div class="col-md-5">
+                            <div class="input-group">
+                                <span class="input-group-text bg-white border-end-0"><i class="bi bi-search text-muted"></i></span>
+                                <input type="text" class="form-control border-start-0 rounded-end-3" placeholder="Tìm kiếm theo tên sản phẩm..." disabled>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <select class="form-select rounded-3">
+                                <option value="">Tất cả phân loại</option>
+                                <option value="Rau lá">Rau lá</option>
+                                <option value="Củ">Củ</option>
+                                <option value="Quả">Quả</option>
+                            </select>
+                        </div>
+                        <div class="col-md-4">
+                            <select class="form-select rounded-3">
+                                <option value="">Tất cả trạng thái</option>
+                                <option value="Còn hàng">Còn hàng</option>
+                                <option value="Sắp hết hàng">Sắp hết hàng</option>
+                                <option value="Hết hàng">Hết hàng</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Data Table -->
+                    <div class="table-responsive mb-4">
+                        <table class="table table-hover align-middle mb-0 text-center">
+                            <thead class="table-light">
+                                <tr>
+                                    <th class="text-start">Mã SP</th>
+                                    <th class="text-start">Tên rau quả</th>
+                                    <th>Danh mục</th>
+                                    <th>Số lượng tồn</th>
+                                    <th>Đơn vị</th>
+                                    <th>Hạn sử dụng</th>
+                                    <th>Trạng thái</th>
+                                    <th>Tác vụ</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="text-start font-monospace">SP001</td>
+                                    <td class="text-start fw-bold">Cà chua</td>
+                                    <td><span class="badge bg-success bg-opacity-10 text-success rounded-pill px-3">Quả</span></td>
+                                    <td class="fw-bold">150</td>
+                                    <td>kg</td>
+                                    <td>2026-07-30</td>
+                                    <td><span class="badge bg-success rounded-pill px-2.5">Còn hàng</span></td>
+                                    <td>
+                                        <button class="btn btn-sm btn-outline-danger rounded-circle"><i class="bi bi-trash"></i></button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="text-start font-monospace">SP002</td>
+                                    <td class="text-start fw-bold">Bông cải xanh</td>
+                                    <td><span class="badge bg-success bg-opacity-10 text-success rounded-pill px-3">Rau lá</span></td>
+                                    <td class="fw-bold">35</td>
+                                    <td>kg</td>
+                                    <td>2026-07-28</td>
+                                    <td><span class="badge bg-warning text-dark rounded-pill px-2.5">Sắp hết hàng</span></td>
+                                    <td>
+                                        <button class="btn btn-sm btn-outline-danger rounded-circle"><i class="bi bi-trash"></i></button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="text-start font-monospace">SP003</td>
+                                    <td class="text-start fw-bold">Cà rốt Đà Lạt</td>
+                                    <td><span class="badge bg-success bg-opacity-10 text-success rounded-pill px-3">Củ</span></td>
+                                    <td class="fw-bold">8</td>
+                                    <td>kg</td>
+                                    <td>2026-08-05</td>
+                                    <td><span class="badge bg-warning text-dark rounded-pill px-2.5">Sắp hết hàng</span></td>
+                                    <td>
+                                        <button class="btn btn-sm btn-outline-danger rounded-circle"><i class="bi bi-trash"></i></button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="text-start font-monospace">SP004</td>
+                                    <td class="text-start fw-bold">Khoai tây</td>
+                                    <td><span class="badge bg-success bg-opacity-10 text-success rounded-pill px-3">Củ</span></td>
+                                    <td class="fw-bold">200</td>
+                                    <td>kg</td>
+                                    <td>2026-08-15</td>
+                                    <td><span class="badge bg-success rounded-pill px-2.5">Còn hàng</span></td>
+                                    <td>
+                                        <button class="btn btn-sm btn-outline-danger rounded-circle"><i class="bi bi-trash"></i></button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="text-start font-monospace">SP005</td>
+                                    <td class="text-start fw-bold">Táo tây</td>
+                                    <td><span class="badge bg-success bg-opacity-10 text-success rounded-pill px-3">Quả</span></td>
+                                    <td class="fw-bold">0</td>
+                                    <td>kg</td>
+                                    <td>2026-07-22</td>
+                                    <td><span class="badge bg-danger rounded-pill px-2.5">Hết hàng</span></td>
+                                    <td>
+                                        <button class="btn btn-sm btn-outline-danger rounded-circle"><i class="bi bi-trash"></i></button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- Pagination and totals -->
+                    <div class="d-flex flex-wrap justify-content-between align-items-center gap-3">
+                        <div class="text-muted small">
+                            Hiển thị từ 1 đến 5 trong tổng số 5 sản phẩm
+                        </div>
+                        <nav aria-label="Page navigation">
+                            <ul class="pagination pagination-sm mb-0">
+                                <li class="page-item disabled"><a class="page-link" href="#"><i class="bi bi-chevron-left"></i></a></li>
+                                <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                                <li class="page-item disabled"><a class="page-link" href="#"><i class="bi bi-chevron-right"></i></a></li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- Mobile Drawer -->
+    <div class="offcanvas offcanvas-start" tabindex="-1" id="mobileSidebar" aria-labelledby="mobileSidebarLabel">
+        <div class="offcanvas-header border-bottom">
+            <h5 class="offcanvas-title fw-bold" id="mobileSidebarLabel" style="color: var(--primary);">VEG-AI</h5>
+            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body p-0">
+            <div class="sidebar enterprise-theme" style="width: 100%; border: none;">
+                <div class="sidebar-header d-flex align-items-center gap-2">
+                    <i class="bi bi-camera-fill fs-4 text-success"></i>
+                    <span class="fw-bold small text-success">VEG-AI ENTERPRISE</span>
+                </div>
+                <div class="sidebar-menu">
+                    <a href="../enterprise/dashboard.html" class="sidebar-link"><i class="bi bi-grid-1x2"></i>Tổng quan</a>
+                    <a href="../enterprise/inventory-scan.html" class="sidebar-link"><i class="bi bi-qr-code-scan"></i>Kiểm kê Webcam</a>
+                    <a href="../enterprise/warehouse.html" class="sidebar-link active"><i class="bi bi-box-seam"></i>Quản lý Kho</a>
+                    <a href="../enterprise/stock-transactions.html" class="sidebar-link"><i class="bi bi-arrow-down-up"></i>Nhập / Xuất kho</a>
+                    <a href="../index.html#demo-scan" class="sidebar-link"><i class="bi bi-camera"></i>Nhận diện AI</a>
+                    <hr style="border-color: #2d3c30;">
+                    <a href="#" class="sidebar-link btn-logout-trigger"><i class="bi bi-box-arrow-right"></i>Đăng xuất</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Form: Add Product (Mock) -->
+    <div class="modal fade" id="addProductModal" tabindex="-1" aria-labelledby="addProductModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content rounded-4 border-0 shadow">
+                <div class="modal-header border-bottom-0">
+                    <h5 class="modal-title fw-bold" id="addProductModalLabel">Đăng ký sản phẩm mới (Giả lập)</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form id="addProductForm">
+                    <div class="modal-body">
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">Tên rau củ quả</label>
+                            <input type="text" class="form-control rounded-3" placeholder="Ví dụ: Dưa leo sạch Lâm Đồng" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">Phân loại danh mục</label>
+                            <select class="form-select rounded-3">
+                                <option value="Rau lá">Rau lá</option>
+                                <option value="Củ">Củ</option>
+                                <option value="Quả">Quả</option>
+                            </select>
+                        </div>
+                        <div class="row">
+                            <div class="col-6 mb-3">
+                                <label class="form-label fw-bold">Số lượng ban đầu</label>
+                                <input type="number" class="form-control rounded-3" value="50" required>
+                            </div>
+                            <div class="col-6 mb-3">
+                                <label class="form-label fw-bold">Đơn vị tính</label>
+                                <input type="text" class="form-control rounded-3" value="kg" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer border-top-0">
+                        <button type="button" class="btn btn-outline-secondary rounded-pill px-4" data-bs-dismiss="modal">Hủy bỏ</button>
+                        <button type="button" class="btn btn-success rounded-pill px-4 fw-bold" data-bs-dismiss="modal">Đăng ký</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../assets/js/app.js"></script>
+</body>
+</html>

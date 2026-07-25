@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nhập Xuất Kho - VEG-AI</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="../assets/css/style.css" rel="stylesheet">
+</head>
+<body>
+
+    <div class="app-wrapper">
+        <!-- Sidebar Navigation Drawer -->
+        <aside class="sidebar enterprise-theme">
+            <div class="sidebar-header d-flex align-items-center gap-2">
+                <i class="bi bi-camera-fill fs-4 text-success"></i>
+                <span class="fw-bold small text-success">VEG-AI ENTERPRISE</span>
+            </div>
+            <div class="sidebar-menu">
+                <a href="../enterprise/dashboard.html" class="sidebar-link"><i class="bi bi-grid-1x2"></i>Tổng quan</a>
+                <a href="../enterprise/inventory-scan.html" class="sidebar-link"><i class="bi bi-qr-code-scan"></i>Kiểm kê Webcam</a>
+                <a href="../enterprise/warehouse.html" class="sidebar-link active"><i class="bi bi-box-seam"></i>Quản lý Kho</a>
+                <a href="../enterprise/stock-transactions.html" class="sidebar-link active"><i class="bi bi-arrow-down-up"></i>Nhập / Xuất kho</a>
+                <a href="../index.html#demo-scan" class="sidebar-link"><i class="bi bi-camera"></i>Nhận diện AI</a>
+                <hr style="border-color: #2d3c30;">
+                <a href="#" class="sidebar-link btn-logout-trigger"><i class="bi bi-box-arrow-right"></i>Đăng xuất</a>
+            </div>
+        </aside>
+
+        <!-- Main Panel Content -->
+        <div class="main-content">
+            <header class="top-navbar enterprise-theme">
+                <button class="btn d-lg-none text-white" type="button" data-bs-toggle="offcanvas" data-bs-target="#mobileSidebar">
+                    <i class="bi bi-list fs-3"></i>
+                </button>
+                <h4 class="fw-bold text-success mb-0 d-none d-sm-block">Lịch Sử Giao Dịch Nhập Xuất</h4>
+                <div class="dropdown">
+                    <button class="btn d-flex align-items-center gap-2 dropdown-toggle text-white" type="button" data-bs-toggle="dropdown">
+                        <div class="rounded-circle bg-success text-white d-flex align-items-center justify-content-center" style="width: 38px; height: 38px;">
+                            <i class="bi bi-building"></i>
+                        </div>
+                        <div class="text-start d-none d-sm-block">
+                            <div class="fw-bold small current-username">Green Warehouse Co</div>
+                            <div class="text-muted small" style="font-size: 0.75rem;"><span class="current-role">Doanh nghiệp</span></div>
+                        </div>
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end shadow border-0 mt-2">
+                        <li><a class="dropdown-item" href="#"><i class="bi bi-person me-2"></i>Hồ sơ</a></li>
+                        <li><a class="dropdown-item" href="#"><i class="bi bi-gear me-2"></i>Cài đặt</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item btn-logout-trigger" href="#"><i class="bi bi-box-arrow-right me-2"></i>Đăng xuất</a></li>
+                    </ul>
+                </div>
+            </header>
+
+            <main class="content-body">
+                <!-- Summary Metrics Row -->
+                <div class="row g-4 mb-4">
+                    <div class="col-md-4">
+                        <div class="card card-premium p-4">
+                            <div class="text-muted small fw-bold mb-2">TỔNG LƯỢNG NHẬP THÁNG</div>
+                            <h3 class="fw-bold text-success">120 kg</h3>
+                            <span class="text-muted small">Dựa trên phiếu nhập hoàn tất</span>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card card-premium p-4">
+                            <div class="text-muted small fw-bold mb-2">TỔNG LƯỢNG XUẤT THÁNG</div>
+                            <h3 class="fw-bold text-danger">70 kg</h3>
+                            <span class="text-muted small">Dựa trên phiếu xuất hoàn tất</span>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card card-premium p-4">
+                            <div class="text-muted small fw-bold mb-2">CHÊNH LỆCH TỒN RÒNG</div>
+                            <h3 class="fw-bold text-success">50 kg</h3>
+                            <span class="small text-success"><i class="bi bi-arrow-up-right-circle-fill"></i> Tăng trưởng trữ lượng kho</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Transaction Tabs layout -->
+                <div class="card card-premium p-4">
+                    <div class="d-flex flex-wrap justify-content-between align-items-center mb-4 gap-3">
+                        <ul class="nav nav-tabs border-bottom-0" id="transactionTabs" role="tablist">
+                            <li class="nav-item">
+                                <button class="nav-link active fw-bold text-success" id="import-tab" data-bs-toggle="tab" data-bs-target="#import-pane" type="button">Lịch sử Nhập Kho</button>
+                            </li>
+                            <li class="nav-item">
+                                <button class="nav-link fw-bold text-success" id="export-tab" data-bs-toggle="tab" data-bs-target="#export-pane" type="button">Lịch sử Xuất Kho</button>
+                            </li>
+                        </ul>
+                        <button type="button" class="btn btn-success rounded-pill px-4 fw-bold shadow-md" data-bs-toggle="modal" data-bs-target="#createTicketModal">
+                            <i class="bi bi-file-earmark-plus me-1"></i> Tạo phiếu giao dịch
+                        </button>
+                    </div>
+
+                    <div class="tab-content" id="transactionTabsContent">
+                        <!-- IMPORT PANE -->
+                        <div class="tab-pane fade show active" id="import-pane" role="tabpanel">
+                            <div class="table-responsive">
+                                <table class="table table-hover align-middle mb-0 text-center">
+                                    <thead class="table-light">
+                                        <tr>
+                                            <th>Mã phiếu</th>
+                                            <th>Ngày lập</th>
+                                            <th class="text-start">Tên sản phẩm</th>
+                                            <th>Số lượng nhập</th>
+                                            <th>Người thực hiện</th>
+                                            <th class="text-start">Ghi chú</th>
+                                            <th>Trạng thái</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td class="font-monospace">PN001</td>
+                                            <td>2026-07-24</td>
+                                            <td class="text-start fw-bold">Cà chua</td>
+                                            <td class="text-success fw-bold">+100 kg</td>
+                                            <td>Nguyễn Văn A</td>
+                                            <td class="text-start text-secondary small">Nhập tươi mới từ nông trại Lâm Đồng</td>
+                                            <td><span class="badge bg-success rounded-pill px-2.5">Hoàn tất</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="font-monospace">PN002</td>
+                                            <td>2026-07-25</td>
+                                            <td class="text-start fw-bold">Cà rốt Đà Lạt</td>
+                                            <td class="text-success fw-bold">+20 kg</td>
+                                            <td>Trần Thị B</td>
+                                            <td class="text-start text-secondary small">Nhập bổ sung kho hàng quận 1</td>
+                                            <td><span class="badge bg-success rounded-pill px-2.5">Hoàn tất</span></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <!-- EXPORT PANE -->
+                        <div class="tab-pane fade" id="export-pane" role="tabpanel">
+                            <div class="table-responsive">
+                                <table class="table table-hover align-middle mb-0 text-center">
+                                    <thead class="table-light">
+                                        <tr>
+                                            <th>Mã phiếu</th>
+                                            <th>Ngày lập</th>
+                                            <th class="text-start">Tên sản phẩm</th>
+                                            <th>Số lượng xuất</th>
+                                            <th>Người thực hiện</th>
+                                            <th class="text-start">Ghi chú</th>
+                                            <th>Trạng thái</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td class="font-monospace">PX001</td>
+                                            <td>2026-07-24</td>
+                                            <td class="text-start fw-bold">Cà chua</td>
+                                            <td class="text-danger fw-bold">-20 kg</td>
+                                            <td>Nguyễn Văn A</td>
+                                            <td class="text-start text-secondary small">Xuất bán lẻ tại quầy</td>
+                                            <td><span class="badge bg-success rounded-pill px-2.5">Hoàn tất</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="font-monospace">PX002</td>
+                                            <td>2026-07-25</td>
+                                            <td class="text-start fw-bold">Khoai tây</td>
+                                            <td class="text-danger fw-bold">-50 kg</td>
+                                            <td>Trần Thị B</td>
+                                            <td class="text-start text-secondary small">Xuất giao siêu thị đối tác</td>
+                                            <td><span class="badge bg-success rounded-pill px-2.5">Hoàn tất</span></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- Mobile Drawer -->
+    <div class="offcanvas offcanvas-start" tabindex="-1" id="mobileSidebar" aria-labelledby="mobileSidebarLabel">
+        <div class="offcanvas-header border-bottom">
+            <h5 class="offcanvas-title fw-bold" id="mobileSidebarLabel" style="color: var(--primary);">VEG-AI</h5>
+            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body p-0">
+            <div class="sidebar enterprise-theme" style="width: 100%; border: none;">
+                <div class="sidebar-header d-flex align-items-center gap-2">
+                    <i class="bi bi-camera-fill fs-4 text-success"></i>
+                    <span class="fw-bold small text-success">VEG-AI ENTERPRISE</span>
+                </div>
+                <div class="sidebar-menu">
+                    <a href="../enterprise/dashboard.html" class="sidebar-link"><i class="bi bi-grid-1x2"></i>Tổng quan</a>
+                    <a href="../enterprise/inventory-scan.html" class="sidebar-link"><i class="bi bi-qr-code-scan"></i>Kiểm kê Webcam</a>
+                    <a href="../enterprise/warehouse.html" class="sidebar-link active"><i class="bi bi-box-seam"></i>Quản lý Kho</a>
+                    <a href="../enterprise/stock-transactions.html" class="sidebar-link active"><i class="bi bi-arrow-down-up"></i>Nhập / Xuất kho</a>
+                    <a href="../index.html#demo-scan" class="sidebar-link"><i class="bi bi-camera"></i>Nhận diện AI</a>
+                    <hr style="border-color: #2d3c30;">
+                    <a href="#" class="sidebar-link btn-logout-trigger"><i class="bi bi-box-arrow-right"></i>Đăng xuất</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Form: Create Ticket (Mock) -->
+    <div class="modal fade" id="createTicketModal" tabindex="-1" aria-labelledby="createTicketModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content rounded-4 border-0 shadow">
+                <div class="modal-header border-bottom-0">
+                    <h5 class="modal-title fw-bold" id="createTicketModalLabel">Tạo phiếu giao dịch mới (Giả lập)</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form id="createTicketForm">
+                    <div class="modal-body">
+                        <div class="mb-3">
+                            <label class="form-label fw-bold d-block">Loại giao dịch</label>
+                            <div class="btn-group w-100" role="group">
+                                <input type="radio" class="btn-check" name="txType" id="txTypeImport" value="import" checked>
+                                <label class="btn btn-outline-success py-2 rounded-start-pill" for="txTypeImport"><i class="bi bi-box-arrow-in-down"></i> Phiếu Nhập</label>
+                                <input type="radio" class="btn-check" name="txType" id="txTypeExport" value="export">
+                                <label class="btn btn-outline-danger py-2 rounded-end-pill" for="txTypeExport"><i class="bi bi-box-arrow-up"></i> Phiếu Xuất</label>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">Sản phẩm</label>
+                            <select class="form-select rounded-3">
+                                <option>Cà chua (Tồn: 150 kg)</option>
+                                <option>Bông cải xanh (Tồn: 35 kg)</option>
+                                <option>Khoai tây (Tồn: 200 kg)</option>
+                            </select>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">Số lượng (kg)</label>
+                            <input type="number" class="form-control rounded-3" value="10" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">Ghi chú giao dịch</label>
+                            <textarea class="form-control rounded-3" rows="2" placeholder="Nhập ghi chú..."></textarea>
+                        </div>
+                    </div>
+                    <div class="modal-footer border-top-0">
+                        <button type="button" class="btn btn-outline-secondary rounded-pill px-4" data-bs-dismiss="modal">Đóng</button>
+                        <button type="button" class="btn btn-success rounded-pill px-4 fw-bold" data-bs-dismiss="modal">Hoàn tất</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../assets/js/app.js"></script>
+</body>
+</html>

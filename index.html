@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Vegetable - Hệ thống Nhận diện & Quản lý Rau Củ Quả bằng AI</title>
+    <meta name="description" content="Nền tảng ứng dụng công nghệ trí tuệ nhân tạo để nhận dạng, theo dõi calo, và quản lý tồn kho rau củ sạch hiệu quả.">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="assets/css/style.css" rel="stylesheet">
+</head>
+<body class="bg-white">
+
+    <!-- Header Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom py-3">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center gap-2 fw-bold" href="index.html" style="color: var(--primary);">
+                <i class="bi bi-camera-fill fs-4 text-success"></i>
+                <span>VEG-AI</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#landingNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="landingNav">
+                <ul class="navbar-nav ms-auto align-items-center gap-3 mt-3 mt-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link text-dark fw-500" href="#demo-scan"><i class="bi bi-camera me-1"></i>Quét thử AI</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark fw-500" href="login.html">Đăng nhập</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="btn btn-success px-4 py-2 rounded-pill fw-bold" href="login.html?tab=register">Đăng ký ngay</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="py-5 my-md-5">
+        <div class="container">
+            <div class="row align-items-center g-5">
+                <div class="col-lg-6">
+                    <div class="badge bg-success-subtle text-success border border-success-subtle px-3 py-2 rounded-pill mb-3 fw-bold">
+                        <i class="bi bi-cpu me-1"></i> AI-Powered Technology
+                    </div>
+                    <h1 class="display-4 fw-extrabold tracking-tight mb-3" style="color: var(--primary-dark); line-height: 1.2;">
+                        Quản lý & Nhận diện<br>Rau Củ Quả bằng AI
+                    </h1>
+                    <p class="lead text-muted mb-4" style="max-width: 500px;">
+                        Giải pháp tối ưu hóa dinh dưỡng cá nhân và số hóa quản lý kho hàng siêu thị thông qua camera nhận dạng thông minh.
+                    </p>
+                    <div class="d-flex flex-column flex-sm-row gap-3">
+                        <a href="#demo-scan" class="btn btn-success btn-lg px-5 py-3 rounded-pill fw-bold shadow-md">
+                            <i class="bi bi-camera-fill me-1"></i> Quét thử ngay (Không đăng nhập)
+                        </a>
+                        <a href="login.html" class="btn btn-outline-secondary btn-lg px-4 py-3 rounded-pill fw-bold">
+                            Đăng nhập tài khoản
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="position-relative">
+                        <div class="position-absolute top-50 start-50 translate-middle bg-success opacity-10 rounded-circle filter-blur" style="width: 400px; height: 400px; z-index: -1;"></div>
+                        <img src="assets/images/hero.png" alt="AI Scan Mockup" class="img-fluid rounded-4 shadow-lg border">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Try AI Scanner Demo Section (Embedded for Guests) -->
+    <section id="demo-scan" class="py-5" style="background-color: var(--bg-light); scroll-margin-top: 20px;">
+        <div class="container">
+            <div class="text-center mb-5">
+                <div class="badge bg-success-subtle text-success border border-success-subtle px-3 py-2 rounded-pill mb-2 fw-bold">
+                    Interactive Trial
+                </div>
+                <h2 class="fw-bold display-6 mb-2">Trải nghiệm Quét thử AI trực tiếp</h2>
+                <p class="text-muted" style="max-width: 550px; margin: 0 auto;">
+                    Không cần đăng ký. Hãy chạy thử tính năng nhận diện, tính calo và kiểm soát độ tươi mát ngay bên dưới.
+                </p>
+            </div>
+
+            <div class="row g-4">
+                <!-- Left: Mock Camera Container -->
+                <div class="col-lg-7">
+                    <div class="card card-premium p-4 h-100">
+                        <h4 class="fw-bold mb-3 d-flex align-items-center gap-2">
+                            <i class="bi bi-camera-video text-success"></i> Giả lập camera nhận diện AI
+                        </h4>
+                        <p class="text-muted small">Khung mô phỏng luồng hình ảnh của thiết bị máy ảnh quét rau củ quả.</p>
+                        
+                        <div class="camera-container mb-4 position-relative">
+                            <img src="assets/images/hero.png" class="camera-feed" alt="Camera mockup feed image">
+                            <div class="camera-overlay">
+                                <div class="camera-overlay-bottom-left"></div>
+                                <div class="camera-overlay-bottom-right"></div>
+                            </div>
+                        </div>
+
+                        <div class="d-flex justify-content-center gap-3">
+                            <button id="btnMockScanHome" class="btn btn-success rounded-pill px-4 py-2.5 fw-bold shadow-md">
+                                <i class="bi bi-play-fill me-1"></i> Bắt đầu quét thử
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right: Scan result details -->
+                <div class="col-lg-5">
+                    <!-- AI Results Output -->
+                    <div class="card card-premium p-4 mb-4">
+                        <h4 class="fw-bold mb-3 d-flex align-items-center gap-2">
+                            <i class="bi bi-cpu text-success"></i> Kết quả phân tích
+                        </h4>
+                        
+                        <div id="aiEmptyStateHome" class="text-center py-5">
+                            <i class="bi bi-search text-muted display-4 mb-3 d-block"></i>
+                            <p class="text-muted small">Bấm nút "Bắt đầu quét thử" bên cạnh để xem kết quả mô phỏng.</p>
+                        </div>
+
+                        <div id="aiResultStateHome" class="d-none">
+                            <div class="d-flex justify-content-between align-items-center mb-3">
+                                <h3 class="fw-bold text-success mb-0">Cà chua chín</h3>
+                                <span class="badge bg-success rounded-pill">98% Match</span>
+                            </div>
+
+                            <div class="mb-4">
+                                <label class="form-label small fw-bold d-flex justify-content-between">
+                                    <span>Độ tươi ngon</span>
+                                    <span>92% (Rất tươi)</span>
+                                </label>
+                                <div class="progress rounded-pill" style="height: 10px;">
+                                    <div class="progress-bar bg-success" role="progressbar" style="width: 92%;"></div>
+                                </div>
+                            </div>
+
+                            <h5 class="fw-bold mb-2">Dinh dưỡng (mỗi 100g)</h5>
+                            <div class="table-responsive mb-3">
+                                <table class="table table-bordered table-sm text-center mb-0">
+                                    <thead class="table-light">
+                                        <tr>
+                                            <th>Calo</th>
+                                            <th>Đạm</th>
+                                            <th>Carb</th>
+                                            <th>Béo</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>18 kcal</td>
+                                            <td>0.9g</td>
+                                            <td>3.9g</td>
+                                            <td>0.2g</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <div class="accordion" id="infoAccordionHome">
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header">
+                                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapsePreserveHome">
+                                            Cách bảo quản
+                                        </button>
+                                    </h2>
+                                    <div id="collapsePreserveHome" class="accordion-collapse collapse show" data-bs-parent="#infoAccordionHome">
+                                        <div class="accordion-body text-muted small">
+                                            Nên bảo quản ngăn mát tủ lạnh (4-6°C) và bọc lớp màng bọc thực phẩm bảo vệ ẩm.
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Calorie Calculator Form -->
+                    <div class="card card-premium p-4">
+                        <h4 class="fw-bold mb-3 d-flex align-items-center gap-2">
+                            <i class="bi bi-calculator text-success"></i> Tính Calo theo khối lượng (Mẫu)
+                        </h4>
+                        <form>
+                            <div class="mb-3">
+                                <label class="form-label fw-bold small">Tên rau củ</label>
+                                <input type="text" id="calNameHome" class="form-control rounded-3" value="Cà chua chín" placeholder="Ví dụ: Cà chua, Khoai tây...">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label fw-bold small">Khối lượng (gam)</label>
+                                <input type="number" id="calWeightHome" class="form-control rounded-3" value="150" min="1" placeholder="Nhập khối lượng">
+                            </div>
+                            <button type="button" id="btnCalcDemoHome" class="btn btn-success w-100 py-2.5 rounded-pill fw-bold">Tính toán Calo</button>
+                        </form>
+                        <div id="calCalcResultHome" class="alert alert-info d-none mt-3 mb-0" role="alert">
+                            <strong>150g Cà chua chín</strong> chứa khoảng <strong>27 Calo</strong>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Grid -->
+    <section id="features" class="py-5 bg-light border-top border-bottom">
+        <div class="container py-4">
+            <div class="text-center mb-5">
+                <h2 class="fw-bold display-6 mb-3">Giải pháp hai luồng chuyên biệt</h2>
+                <p class="text-muted" style="max-width: 600px; margin: 0 auto;">
+                    Được thiết kế phù hợp hoàn hảo cho cả nhu cầu chăm sóc sức khỏe dinh dưỡng cá nhân và quản lý vận hành kho hàng doanh nghiệp.
+                </p>
+            </div>
+            <div class="row g-4 justify-content-center">
+                <div class="col-md-5">
+                    <div class="card card-premium p-4 h-100 d-flex flex-column justify-content-between">
+                        <div>
+                            <div class="d-inline-flex p-3 rounded-4 bg-success bg-opacity-10 text-success mb-4">
+                                <i class="bi bi-person-fill fs-2"></i>
+                            </div>
+                            <h3 class="fw-bold mb-3">Dành cho Cá nhân</h3>
+                            <p class="text-muted">
+                                Quét rau củ quả để nhận dạng loại thực phẩm, độ tươi ngon, tính toán calo theo khối lượng thực tế và theo dõi báo cáo dinh dưỡng mỗi bữa ăn hàng ngày.
+                            </p>
+                        </div>
+                        <a href="login.html?role=user" class="btn btn-link text-success fw-bold p-0 mt-3 d-flex align-items-center gap-1 text-decoration-none">
+                            Bắt đầu chế độ cá nhân <i class="bi bi-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-md-5">
+                    <div class="card card-premium p-4 h-100 d-flex flex-column justify-content-between">
+                        <div>
+                            <div class="d-inline-flex p-3 rounded-4 bg-success bg-opacity-10 text-success mb-4">
+                                <i class="bi bi-building fs-2"></i>
+                            </div>
+                            <h3 class="fw-bold mb-3">Dành cho Doanh nghiệp</h3>
+                            <p class="text-muted">
+                                Số hóa kho bãi của siêu thị/cửa hàng. Kiểm kê nhanh qua luồng quét camera liên tục, theo dõi cảnh báo hạn sử dụng/tồn kho thấp và tự động hóa xuất nhập kho.
+                            </p>
+                        </div>
+                        <a href="login.html?role=enterprise" class="btn btn-link text-success fw-bold p-0 mt-3 d-flex align-items-center gap-1 text-decoration-none">
+                            Bắt đầu chế độ doanh nghiệp <i class="bi bi-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-4 bg-white">
+        <div class="container text-center">
+            <p class="text-muted mb-0">&copy; 2026 VEG-AI. Thiết kế và phát triển bởi Antigravity.</p>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/mock-data.js"></script>
+    <script src="assets/js/app.js"></script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            // Action mock scans
+            document.getElementById("btnMockScanHome").addEventListener("click", function() {
+                document.getElementById("aiEmptyStateHome").classList.add("d-none");
+                document.getElementById("aiResultStateHome").classList.remove("d-none");
+            });
+
+            document.getElementById("btnCalcDemoHome").addEventListener("click", function() {
+                document.getElementById("calCalcResultHome").classList.remove("d-none");
+            });
+        });
+    </script>
+</body>
+</html>
