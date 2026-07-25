@@ -20,7 +20,7 @@
             </div>
             <div class="sidebar-menu">
                 <a href="../user/dashboard.html" class="sidebar-link"><i class="bi bi-grid-1x2"></i>Tổng quan dinh dưỡng</a>
-                <a href="../index.html#demo-scan" class="sidebar-link"><i class="bi bi-camera"></i>Nhận diện AI</a>
+                <a href="scan.html" class="sidebar-link"><i class="bi bi-camera"></i>Nhận diện AI</a>
                 <a href="../user/reports.html" class="sidebar-link active"><i class="bi bi-journal-text"></i>Bữa ăn hàng ngày</a>
                 <a href="../user/recipes.html" class="sidebar-link"><i class="bi bi-search"></i>Trợ lý ẩm thực</a>
                 <a href="../user/chat.html" class="sidebar-link"><i class="bi bi-chat-dots"></i>AI Chuyên gia</a>
@@ -106,8 +106,9 @@
                                     <td class="fw-bold">Táo tây chín</td>
                                     <td class="text-center">150 g</td>
                                     <td class="text-center fw-bold text-success">78 kcal</td>
-                                    <td>2026-07-25</td>
+                                    <td>2026-07-25 08:30</td>
                                     <td class="text-center">
+                                        <button class="btn btn-sm btn-outline-success rounded-circle me-1" data-bs-toggle="modal" data-bs-target="#addMealModal"><i class="bi bi-pencil"></i></button>
                                         <button class="btn btn-sm btn-outline-danger rounded-circle"><i class="bi bi-trash"></i></button>
                                     </td>
                                 </tr>
@@ -128,8 +129,9 @@
                                     <td class="fw-bold">Bông cải xanh</td>
                                     <td class="text-center">200 g</td>
                                     <td class="text-center fw-bold text-success">68 kcal</td>
-                                    <td>2026-07-25</td>
+                                    <td>2026-07-25 12:15</td>
                                     <td class="text-center">
+                                        <button class="btn btn-sm btn-outline-success rounded-circle me-1" data-bs-toggle="modal" data-bs-target="#addMealModal"><i class="bi bi-pencil"></i></button>
                                         <button class="btn btn-sm btn-outline-danger rounded-circle"><i class="bi bi-trash"></i></button>
                                     </td>
                                 </tr>
@@ -150,8 +152,9 @@
                                     <td class="fw-bold">Cà rốt Đà Lạt</td>
                                     <td class="text-center">100 g</td>
                                     <td class="text-center fw-bold text-success">41 kcal</td>
-                                    <td>2026-07-24</td>
+                                    <td>2026-07-24 19:00</td>
                                     <td class="text-center">
+                                        <button class="btn btn-sm btn-outline-success rounded-circle me-1" data-bs-toggle="modal" data-bs-target="#addMealModal"><i class="bi bi-pencil"></i></button>
                                         <button class="btn btn-sm btn-outline-danger rounded-circle"><i class="bi bi-trash"></i></button>
                                     </td>
                                 </tr>
@@ -187,7 +190,7 @@
                 </div>
                 <div class="sidebar-menu">
                     <a href="../user/dashboard.html" class="sidebar-link"><i class="bi bi-grid-1x2"></i>Tổng quan dinh dưỡng</a>
-                    <a href="../index.html#demo-scan" class="sidebar-link"><i class="bi bi-camera"></i>Nhận diện AI</a>
+                    <a href="scan.html" class="sidebar-link"><i class="bi bi-camera"></i>Nhận diện AI</a>
                     <a href="../user/reports.html" class="sidebar-link active"><i class="bi bi-journal-text"></i>Bữa ăn hàng ngày</a>
                     <a href="../user/recipes.html" class="sidebar-link"><i class="bi bi-search"></i>Trợ lý ẩm thực</a>
                     <a href="../user/chat.html" class="sidebar-link"><i class="bi bi-chat-dots"></i>AI Chuyên gia</a>
@@ -198,12 +201,12 @@
         </div>
     </div>
 
-    <!-- Modal Form: Add Meal Mockup -->
+    <!-- Modal Form: Add/Edit Meal Mockup -->
     <div class="modal fade" id="addMealModal" tabindex="-1" aria-labelledby="addMealModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content rounded-4 border-0 shadow">
                 <div class="modal-header border-bottom-0">
-                    <h5 class="modal-title fw-bold" id="addMealModalLabel">Thêm bữa ăn (Giả lập)</h5>
+                    <h5 class="modal-title fw-bold" id="addMealModalLabel">Thêm / Chỉnh sửa bữa ăn (Giả lập)</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
                 <form id="addMealForm">
@@ -219,6 +222,10 @@
                         <div class="mb-3">
                             <label class="form-label fw-bold">Tên rau củ / Món ăn</label>
                             <input type="text" class="form-control rounded-3" placeholder="Ví dụ: Xà lách trộn thịt bò" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">Thời gian ghi nhận</label>
+                            <input type="datetime-local" class="form-control rounded-3" value="2026-07-25T08:30" required>
                         </div>
                         <div class="row">
                             <div class="col-6 mb-3">

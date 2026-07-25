@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="vi">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,6 +10,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
     <link href="../assets/css/style.css" rel="stylesheet">
 </head>
+
 <body>
 
     <div class="app-wrapper">
@@ -19,10 +21,13 @@
                 <span class="fw-bold small">VEG-AI PERSONAL</span>
             </div>
             <div class="sidebar-menu">
-                <a href="../user/dashboard.html" class="sidebar-link"><i class="bi bi-grid-1x2"></i>Tổng quan dinh dưỡng</a>
-                <a href="../index.html#demo-scan" class="sidebar-link"><i class="bi bi-camera"></i>Nhận diện AI</a>
-                <a href="../user/reports.html" class="sidebar-link"><i class="bi bi-journal-text"></i>Bữa ăn hàng ngày</a>
-                <a href="../user/recipes.html" class="sidebar-link active"><i class="bi bi-search"></i>Trợ lý ẩm thực</a>
+                <a href="../user/dashboard.html" class="sidebar-link"><i class="bi bi-grid-1x2"></i>Tổng quan dinh
+                    dưỡng</a>
+                <a href="scan.html" class="sidebar-link"><i class="bi bi-camera"></i>Nhận diện AI</a>
+                <a href="../user/reports.html" class="sidebar-link"><i class="bi bi-journal-text"></i>Bữa ăn hàng
+                    ngày</a>
+                <a href="../user/recipes.html" class="sidebar-link active"><i class="bi bi-search"></i>Trợ lý ẩm
+                    thực</a>
                 <a href="../user/chat.html" class="sidebar-link"><i class="bi bi-chat-dots"></i>AI Chuyên gia</a>
                 <hr>
                 <a href="#" class="sidebar-link btn-logout-trigger"><i class="bi bi-box-arrow-right"></i>Đăng xuất</a>
@@ -37,8 +42,10 @@
                 </button>
                 <h4 class="fw-bold text-success mb-0 d-none d-sm-block">Trợ lý Công thức Món ăn</h4>
                 <div class="dropdown">
-                    <button class="btn d-flex align-items-center gap-2 dropdown-toggle" type="button" data-bs-toggle="dropdown">
-                        <div class="rounded-circle bg-success text-white d-flex align-items-center justify-content-center" style="width: 38px; height: 38px;">
+                    <button class="btn d-flex align-items-center gap-2 dropdown-toggle" type="button"
+                        data-bs-toggle="dropdown">
+                        <div class="rounded-circle bg-success text-white d-flex align-items-center justify-content-center"
+                            style="width: 38px; height: 38px;">
                             <i class="bi bi-person-fill"></i>
                         </div>
                         <div class="text-start d-none d-sm-block">
@@ -49,8 +56,11 @@
                     <ul class="dropdown-menu dropdown-menu-end shadow border-0 mt-2">
                         <li><a class="dropdown-item" href="#"><i class="bi bi-person me-2"></i>Hồ sơ</a></li>
                         <li><a class="dropdown-item" href="#"><i class="bi bi-gear me-2"></i>Cài đặt</a></li>
-                        <li><hr class="dropdown-divider"></li>
-                        <li><a class="dropdown-item btn-logout-trigger" href="#"><i class="bi bi-box-arrow-right me-2"></i>Đăng xuất</a></li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li><a class="dropdown-item btn-logout-trigger" href="#"><i
+                                    class="bi bi-box-arrow-right me-2"></i>Đăng xuất</a></li>
                     </ul>
                 </div>
             </header>
@@ -59,12 +69,18 @@
                 <!-- Search Section -->
                 <div class="card card-premium p-4 mb-4">
                     <h3 class="fw-bold mb-3">Tìm kiếm công thức nấu ăn</h3>
-                    <p class="text-muted mb-4 small">Nhập tên món ăn hoặc nguyên liệu để tìm kiếm công thức dinh dưỡng lành mạnh.</p>
-                    
+                    <p class="text-muted mb-4 small">Nhập tên món ăn hoặc nguyên liệu để tìm kiếm công thức dinh dưỡng
+                        lành mạnh.</p>
+
                     <div class="position-relative" style="max-width: 600px;">
                         <div class="input-group">
-                            <span class="input-group-text bg-white border-end-0 rounded-start-pill"><i class="bi bi-search text-muted"></i></span>
-                            <input type="text" class="form-control border-start-0 rounded-end-pill py-2.5" placeholder="Nhập tên món ăn..." value="Salad ức gà sốt mè rang" disabled>
+                            <span class="input-group-text bg-white border-end-0 rounded-start-pill"><i
+                                    class="bi bi-search text-muted"></i></span>
+                            <input type="text" id="recipeSearchInput" class="form-control border-start-0 py-2.5"
+                                placeholder="Nhập tên món ăn... Ví dụ: Salad ức gà, Súp lơ xào thịt bò, Canh cà chua..."
+                                value="Salad ức gà sốt mè rang">
+                            <button class="btn btn-success rounded-end-pill px-4 fw-bold" id="btnSearchRecipe"><i
+                                    class="bi bi-search me-1"></i>Tìm kiếm</button>
                         </div>
                     </div>
                 </div>
@@ -77,10 +93,14 @@
                             <!-- Nav tabs -->
                             <ul class="nav nav-tabs border-bottom mb-4" id="recipeTabs" role="tablist">
                                 <li class="nav-item">
-                                    <button class="nav-link active fw-bold text-success" id="cook-tab" data-bs-toggle="tab" data-bs-target="#cook-pane" type="button">Cách chế biến</button>
+                                    <button class="nav-link active fw-bold text-success" id="cook-tab"
+                                        data-bs-toggle="tab" data-bs-target="#cook-pane" type="button">Cách chế
+                                        biến</button>
                                 </li>
                                 <li class="nav-item">
-                                    <button class="nav-link fw-bold text-success" id="nutrition-tab" data-bs-toggle="tab" data-bs-target="#nutrition-pane" type="button">Giá trị dinh dưỡng</button>
+                                    <button class="nav-link fw-bold text-success" id="nutrition-tab"
+                                        data-bs-toggle="tab" data-bs-target="#nutrition-pane" type="button">Giá trị dinh
+                                        dưỡng</button>
                                 </li>
                             </ul>
 
@@ -88,32 +108,44 @@
                                 <!-- COOK TAB -->
                                 <div class="tab-pane fade show active" id="cook-pane" role="tabpanel">
                                     <div class="d-flex flex-wrap gap-3 mb-4 text-muted small">
-                                        <span><i class="bi bi-alarm-fill text-success"></i> <strong>15 phút</strong></span>
-                                        <span><i class="bi bi-people-fill text-success"></i> <strong>2 người ăn</strong></span>
+                                        <span><i class="bi bi-alarm-fill text-success"></i> <strong id="cookTime">15
+                                                phút</strong></span>
+                                        <span><i class="bi bi-people-fill text-success"></i> <strong id="serveCount">2
+                                                người ăn</strong></span>
                                     </div>
-                                    
-                                    <h5 class="fw-bold mb-3"><i class="bi bi-basket3 text-success"></i> Danh sách nguyên liệu</h5>
+
+                                    <h5 class="fw-bold mb-3"><i class="bi bi-basket3 text-success"></i> Danh sách nguyên
+                                        liệu</h5>
                                     <p class="text-muted small mb-2">Bấm vào nguyên liệu để đánh dấu đã có sẵn:</p>
-                                    <ul class="list-group list-group-flush mb-4">
-                                        <li class="list-group-item checklist-item py-2 px-0 d-flex align-items-center gap-2 border-0 bg-transparent">
+                                    <ul class="list-group list-group-flush mb-4" id="ingredientsList">
+                                        <li
+                                            class="list-group-item checklist-item py-2 px-0 d-flex align-items-center gap-2 border-0 bg-transparent">
                                             <i class="bi bi-circle text-muted"></i> <span>Ức gà phi lê: 200g</span>
                                         </li>
-                                        <li class="list-group-item checklist-item py-2 px-0 d-flex align-items-center gap-2 border-0 bg-transparent">
+                                        <li
+                                            class="list-group-item checklist-item py-2 px-0 d-flex align-items-center gap-2 border-0 bg-transparent">
                                             <i class="bi bi-circle text-muted"></i> <span>Xà lách thủy canh: 150g</span>
                                         </li>
-                                        <li class="list-group-item checklist-item py-2 px-0 d-flex align-items-center gap-2 border-0 bg-transparent">
+                                        <li
+                                            class="list-group-item checklist-item py-2 px-0 d-flex align-items-center gap-2 border-0 bg-transparent">
                                             <i class="bi bi-circle text-muted"></i> <span>Cà chua bi: 100g</span>
                                         </li>
-                                        <li class="list-group-item checklist-item py-2 px-0 d-flex align-items-center gap-2 border-0 bg-transparent">
-                                            <i class="bi bi-circle text-muted"></i> <span>Sốt mè rang: 3 muỗng canh</span>
+                                        <li
+                                            class="list-group-item checklist-item py-2 px-0 d-flex align-items-center gap-2 border-0 bg-transparent">
+                                            <i class="bi bi-circle text-muted"></i> <span>Sốt mè rang: 3 muỗng
+                                                canh</span>
                                         </li>
                                     </ul>
 
-                                    <h5 class="fw-bold mb-3"><i class="bi bi-journal-check text-success"></i> Các bước thực hiện</h5>
-                                    <ol class="list-group list-group-numbered list-group-flush gap-2">
-                                        <li class="list-group-item py-2 px-0 border-0 bg-transparent text-secondary">Ức gà luộc chín chín áp chảo xé sợi vừa ăn.</li>
-                                        <li class="list-group-item py-2 px-0 border-0 bg-transparent text-secondary">Rau xà lách rửa sạch cắt khúc ngắn, cà chua bi chẻ làm đôi.</li>
-                                        <li class="list-group-item py-2 px-0 border-0 bg-transparent text-secondary">Trộn đều rau, thịt gà xé và rưới nước sốt mè rang lên trên.</li>
+                                    <h5 class="fw-bold mb-3"><i class="bi bi-journal-check text-success"></i> Các bước
+                                        thực hiện</h5>
+                                    <ol class="list-group list-group-numbered list-group-flush gap-2" id="stepsList">
+                                        <li class="list-group-item py-2 px-0 border-0 bg-transparent text-secondary">Ức
+                                            gà luộc chín chín áp chảo xé sợi vừa ăn.</li>
+                                        <li class="list-group-item py-2 px-0 border-0 bg-transparent text-secondary">Rau
+                                            xà lách rửa sạch cắt khúc ngắn, cà chua bi chẻ làm đôi.</li>
+                                        <li class="list-group-item py-2 px-0 border-0 bg-transparent text-secondary">
+                                            Trộn đều rau, thịt gà xé và rưới nước sốt mè rang lên trên.</li>
                                     </ol>
                                 </div>
 
@@ -121,7 +153,7 @@
                                 <div class="tab-pane fade" id="nutrition-pane" role="tabpanel">
                                     <div class="text-center py-4 bg-light rounded-4 border mb-4">
                                         <div class="text-muted small fw-bold">NĂNG LƯỢNG MÓN ĂN</div>
-                                        <h2 class="fw-extrabold text-success mb-0 display-5">320</h2>
+                                        <h2 class="fw-extrabold text-success mb-0 display-5" id="caloriesBadge">320</h2>
                                         <div class="text-muted small">kcal / phần ăn</div>
                                     </div>
 
@@ -129,28 +161,31 @@
                                     <div class="mb-3">
                                         <div class="d-flex justify-content-between mb-1 small fw-bold">
                                             <span>Protein</span>
-                                            <span>28g (35%)</span>
+                                            <span id="proteinText">28g (35%)</span>
                                         </div>
                                         <div class="progress rounded-pill" style="height: 10px;">
-                                            <div class="progress-bar bg-success" role="progressbar" style="width: 35%;"></div>
+                                            <div class="progress-bar bg-success" role="progressbar" style="width: 35%;"
+                                                id="proteinBar"></div>
                                         </div>
                                     </div>
                                     <div class="mb-3">
                                         <div class="d-flex justify-content-between mb-1 small fw-bold">
                                             <span>Carbohydrates</span>
-                                            <span>12g (15%)</span>
+                                            <span id="carbText">12g (15%)</span>
                                         </div>
                                         <div class="progress rounded-pill" style="height: 10px;">
-                                            <div class="progress-bar bg-info" role="progressbar" style="width: 15%;"></div>
+                                            <div class="progress-bar bg-info" role="progressbar" style="width: 15%;"
+                                                id="carbBar"></div>
                                         </div>
                                     </div>
                                     <div class="mb-4">
                                         <div class="d-flex justify-content-between mb-1 small fw-bold">
                                             <span>Chất béo</span>
-                                            <span>16g (50%)</span>
+                                            <span id="fatText">16g (50%)</span>
                                         </div>
                                         <div class="progress rounded-pill" style="height: 10px;">
-                                            <div class="progress-bar bg-warning" role="progressbar" style="width: 50%;"></div>
+                                            <div class="progress-bar bg-warning" role="progressbar" style="width: 50%;"
+                                                id="fatBar"></div>
                                         </div>
                                     </div>
                                 </div>
@@ -161,9 +196,10 @@
                     <!-- Right: Related Recipes / Photo preview -->
                     <div class="col-lg-5">
                         <div class="card card-premium p-4 h-100">
-                            <h4 id="recipeTitle" class="fw-bold text-success mb-3">Món Ăn Được Chọn</h4>
-                            <p class="text-muted small mb-4">Một số gợi ý công thức dinh dưỡng lành mạnh khác có thể bạn quan tâm:</p>
-                            
+                            <h4 id="recipeSelectedTitle" class="fw-bold text-success mb-3">Salad ức gà sốt mè rang</h4>
+                            <p class="text-muted small mb-4">Một số gợi ý công thức dinh dưỡng lành mạnh khác có thể bạn
+                                quan tâm:</p>
+
                             <!-- Related Recipes -->
                             <div class="row g-3">
                                 <div class="col-12">
@@ -205,13 +241,17 @@
                     <span class="fw-bold small">VEG-AI PERSONAL</span>
                 </div>
                 <div class="sidebar-menu">
-                    <a href="../user/dashboard.html" class="sidebar-link"><i class="bi bi-grid-1x2"></i>Tổng quan dinh dưỡng</a>
-                    <a href="../index.html#demo-scan" class="sidebar-link"><i class="bi bi-camera"></i>Nhận diện AI</a>
-                    <a href="../user/reports.html" class="sidebar-link"><i class="bi bi-journal-text"></i>Bữa ăn hàng ngày</a>
-                    <a href="../user/recipes.html" class="sidebar-link active"><i class="bi bi-search"></i>Trợ lý ẩm thực</a>
+                    <a href="../user/dashboard.html" class="sidebar-link"><i class="bi bi-grid-1x2"></i>Tổng quan dinh
+                        dưỡng</a>
+                    <a href="scan.html" class="sidebar-link"><i class="bi bi-camera"></i>Nhận diện AI</a>
+                    <a href="../user/reports.html" class="sidebar-link"><i class="bi bi-journal-text"></i>Bữa ăn hàng
+                        ngày</a>
+                    <a href="../user/recipes.html" class="sidebar-link active"><i class="bi bi-search"></i>Trợ lý ẩm
+                        thực</a>
                     <a href="../user/chat.html" class="sidebar-link"><i class="bi bi-chat-dots"></i>AI Chuyên gia</a>
                     <hr>
-                    <a href="#" class="sidebar-link btn-logout-trigger"><i class="bi bi-box-arrow-right"></i>Đăng xuất</a>
+                    <a href="#" class="sidebar-link btn-logout-trigger"><i class="bi bi-box-arrow-right"></i>Đăng
+                        xuất</a>
                 </div>
             </div>
         </div>
@@ -223,20 +263,149 @@
 
     <script>
         document.addEventListener("DOMContentLoaded", () => {
-            // Setup simple click checklist visual toggle
-            const items = document.querySelectorAll(".checklist-item");
-            items.forEach(li => {
-                li.addEventListener("click", () => {
-                    li.classList.toggle("checked");
-                    const icon = li.querySelector("i");
-                    if (li.classList.contains("checked")) {
-                        icon.className = "bi bi-check-circle-fill text-success me-1";
-                    } else {
-                        icon.className = "bi bi-circle text-muted me-1";
-                    }
+            // Setup simple click checklist visual toggle helper function
+            function bindChecklistEvents() {
+                const items = document.querySelectorAll(".checklist-item");
+                items.forEach(li => {
+                    li.addEventListener("click", () => {
+                        li.classList.toggle("checked");
+                        const icon = li.querySelector("i");
+                        if (li.classList.contains("checked")) {
+                            icon.className = "bi bi-check-circle-fill text-success me-1";
+                        } else {
+                            icon.className = "bi bi-circle text-muted me-1";
+                        }
+                    });
                 });
+            }
+
+            bindChecklistEvents();
+
+            // Recipe mock database
+            const recipeDb = {
+                "salad": {
+                    title: "Salad ức gà sốt mè rang",
+                    calories: 320,
+                    cookTime: "15 phút",
+                    serveCount: "2 người ăn",
+                    ingredients: [
+                        "Ức gà phi lê: 200g",
+                        "Xà lách thủy canh: 150g",
+                        "Cà chua bi: 100g",
+                        "Sốt mè rang: 3 muỗng canh"
+                    ],
+                    steps: [
+                        "Ức gà luộc chín áp chảo xé sợi vừa ăn.",
+                        "Rau xà lách rửa sạch cắt khúc ngắn, cà chua bi chẻ làm đôi.",
+                        "Trộn đều rau, thịt gà xé và rưới nước sốt mè rang lên trên."
+                    ],
+                    nutrition: {
+                        protein: "28g (35%)", proteinPct: 35,
+                        carbs: "12g (15%)", carbsPct: 15,
+                        fat: "16g (50%)", fatPct: 50
+                    }
+                },
+                "bò": {
+                    title: "Súp lơ xào thịt bò tỏi",
+                    calories: 250,
+                    cookTime: "20 phút",
+                    serveCount: "2 người ăn",
+                    ingredients: [
+                        "Thịt bò phi lê: 150g",
+                        "Bông cải xanh (Súp lơ): 300g",
+                        "Hành tây, tỏi băm: 1 củ",
+                        "Dầu hào, nước tương: 2 muỗng"
+                    ],
+                    steps: [
+                        "Thịt bò thái mỏng ướp tỏi băm và dầu hào trong 10 phút.",
+                        "Súp lơ chẻ nhỏ rửa sạch, chần sơ nước sôi để giữ độ giòn.",
+                        "Phi thơm tỏi, xào thịt bò chín tái rồi trút súp lơ vào đảo nhanh tay."
+                    ],
+                    nutrition: {
+                        protein: "22g (40%)", proteinPct: 40,
+                        carbs: "15g (25%)", carbsPct: 25,
+                        fat: "8g (35%)", fatPct: 35
+                    }
+                },
+                "cà chua": {
+                    title: "Canh cà chua trứng hành lá",
+                    calories: 140,
+                    cookTime: "10 phút",
+                    serveCount: "3 người ăn",
+                    ingredients: [
+                        "Cà chua chín đỏ: 2 quả",
+                        "Trứng gà ta: 2 quả",
+                        "Hành lá, ngò rí: 1 ít",
+                        "Dầu ăn, hạt nêm: 1 muỗng"
+                    ],
+                    steps: [
+                        "Cà chua thái múi cau. Trứng gà đập ra bát đánh đều.",
+                        "Xào qua cà chua cho chín mềm rồi thêm 600ml nước đun sôi.",
+                        "Rót trứng từ từ vào, khuấy nhẹ tạo vân trứng rồi rắc hành lá nấu chín."
+                    ],
+                    nutrition: {
+                        protein: "12g (30%)", proteinPct: 30,
+                        carbs: "10g (25%)", carbsPct: 25,
+                        fat: "7g (45%)", fatPct: 45
+                    }
+                }
+            };
+
+            function searchRecipe() {
+                const query = document.getElementById("recipeSearchInput").value.trim().toLowerCase();
+                let recipe = recipeDb.salad; // default
+
+                if (query.includes("bò") || query.includes("súp lơ") || query.includes("broccoli") || query.includes("thịt bò")) {
+                    recipe = recipeDb.bò;
+                } else if (query.includes("cà chua") || query.includes("trứng") || query.includes("canh")) {
+                    recipe = recipeDb.càchua;
+                }
+
+                // Update UI elements
+                document.getElementById("recipeSelectedTitle").textContent = recipe.title;
+                document.getElementById("caloriesBadge").textContent = recipe.calories;
+                document.getElementById("cookTime").textContent = recipe.cookTime;
+                document.getElementById("serveCount").textContent = recipe.serveCount;
+
+                // Ingredients
+                const ingredientsList = document.getElementById("ingredientsList");
+                ingredientsList.innerHTML = recipe.ingredients.map(ing => `
+                    <li class="list-group-item checklist-item py-2 px-0 d-flex align-items-center gap-2 border-0 bg-transparent">
+                        <i class="bi bi-circle text-muted"></i> <span>${ing}</span>
+                    </li>
+                `).join("");
+
+                // Steps
+                const stepsList = document.getElementById("stepsList");
+                stepsList.innerHTML = recipe.steps.map(step => `
+                    <li class="list-group-item py-2 px-0 border-0 bg-transparent text-secondary">${step}</li>
+                `).join("");
+
+                // Macros
+                document.getElementById("proteinText").textContent = recipe.nutrition.protein;
+                document.getElementById("proteinBar").style.width = recipe.nutrition.proteinPct + "%";
+
+                document.getElementById("carbText").textContent = recipe.nutrition.carbs;
+                document.getElementById("carbBar").style.width = recipe.nutrition.carbsPct + "%";
+
+                document.getElementById("fatText").textContent = recipe.nutrition.fat;
+                document.getElementById("fatBar").style.width = recipe.nutrition.fatPct + "%";
+
+                // Rebind check actions to new elements
+                bindChecklistEvents();
+            }
+
+            // Click search trigger
+            document.getElementById("btnSearchRecipe").addEventListener("click", searchRecipe);
+
+            // Input enter key trigger
+            document.getElementById("recipeSearchInput").addEventListener("keypress", (e) => {
+                if (e.key === "Enter") {
+                    searchRecipe();
+                }
             });
         });
     </script>
 </body>
+
 </html>

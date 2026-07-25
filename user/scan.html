@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nhận diện AI - VEG-AI</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="../assets/css/style.css" rel="stylesheet">
+</head>
+<body>
+
+    <div class="app-wrapper">
+        <!-- Sidebar Navigation Drawer -->
+        <aside class="sidebar">
+            <div class="sidebar-header d-flex align-items-center gap-2">
+                <i class="bi bi-camera-fill fs-4 text-success"></i>
+                <span class="fw-bold small text-success">VEG-AI PERSONAL</span>
+            </div>
+            <div class="sidebar-menu">
+                <a href="dashboard.html" class="sidebar-link"><i class="bi bi-grid-1x2"></i>Tổng quan dinh dưỡng</a>
+                <a href="scan.html" class="sidebar-link active"><i class="bi bi-camera"></i>Nhận diện AI</a>
+                <a href="reports.html" class="sidebar-link"><i class="bi bi-journal-text"></i>Bữa ăn hàng ngày</a>
+                <a href="recipes.html" class="sidebar-link"><i class="bi bi-search"></i>Trợ lý ẩm thực</a>
+                <a href="chat.html" class="sidebar-link"><i class="bi bi-chat-dots"></i>AI Chuyên gia</a>
+                <hr>
+                <a href="#" class="sidebar-link btn-logout-trigger"><i class="bi bi-box-arrow-right"></i>Đăng xuất</a>
+            </div>
+        </aside>
+
+        <!-- Main Panel Content -->
+        <div class="main-content">
+            <header class="top-navbar">
+                <button class="btn d-lg-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#mobileSidebar">
+                    <i class="bi bi-list fs-3"></i>
+                </button>
+                <h4 class="fw-bold text-success mb-0 d-none d-sm-block">Nhận diện AI cá nhân</h4>
+                <div class="dropdown">
+                    <button class="btn d-flex align-items-center gap-2 dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                        <div class="rounded-circle bg-success text-white d-flex align-items-center justify-content-center" style="width: 38px; height: 38px;">
+                            <i class="bi bi-person-fill"></i>
+                        </div>
+                        <div class="text-start d-none d-sm-block">
+                            <div class="fw-bold small current-username">Người Dùng Cá Nhân</div>
+                            <div class="text-muted small" style="font-size: 0.75rem;"><span class="current-role">Cá nhân</span></div>
+                        </div>
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end shadow border-0 mt-2">
+                        <li><a class="dropdown-item" href="#"><i class="bi bi-person me-2"></i>Hồ sơ</a></li>
+                        <li><a class="dropdown-item" href="#"><i class="bi bi-gear me-2"></i>Cài đặt</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item btn-logout-trigger" href="#"><i class="bi bi-box-arrow-right me-2"></i>Đăng xuất</a></li>
+                    </ul>
+                </div>
+            </header>
+
+            <main class="content-body">
+                <div class="row g-4">
+                    <!-- Left: Camera Mockup -->
+                    <div class="col-xl-7 col-lg-6">
+                        <div class="card card-premium p-4 h-100">
+                            <h4 class="fw-bold mb-3 d-flex align-items-center gap-2">
+                                <i class="bi bi-camera-video text-success"></i> Camera Nhận Diện
+                            </h4>
+                            <p class="text-muted small">Khung giả lập quét webcam để phân tích thực phẩm bằng công nghệ AI.</p>
+                            
+                            <div class="camera-container mb-4 position-relative">
+                                <img src="../assets/images/hero.png" class="camera-feed" alt="Camera Mock Live Feed">
+                                <div class="camera-overlay">
+                                    <div class="camera-overlay-bottom-left"></div>
+                                    <div class="camera-overlay-bottom-right"></div>
+                                </div>
+                            </div>
+
+                            <div class="d-flex flex-wrap justify-content-center gap-3">
+                                <button id="btnMockScan" class="btn btn-success rounded-pill px-4 fw-bold">
+                                    <i class="bi bi-play-fill me-1"></i> Bắt đầu Quét thử
+                                </button>
+                                <button class="btn btn-outline-secondary rounded-pill px-4 fw-bold" disabled>
+                                    <i class="bi bi-upload me-1"></i> Tải ảnh lên
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right: Results & Calculator -->
+                    <div class="col-xl-5 col-lg-6">
+                        <!-- AI Result details -->
+                        <div class="card card-premium p-4 mb-4">
+                            <h4 class="fw-bold mb-3 d-flex align-items-center gap-2">
+                                <i class="bi bi-cpu text-success"></i> Kết quả phân tích
+                            </h4>
+                            
+                            <div id="aiEmptyState" class="text-center py-5">
+                                <i class="bi bi-search text-muted display-4 mb-3 d-block"></i>
+                                <p class="text-muted">Nhấn nút "Bắt đầu Quét thử" để xem mô phỏng kết quả phân tích AI.</p>
+                            </div>
+
+                            <div id="aiResultState" class="d-none">
+                                <div class="d-flex justify-content-between align-items-center mb-3">
+                                    <h3 class="fw-bold text-success mb-0">Cà chua chín</h3>
+                                    <span class="badge bg-success rounded-pill">98% Match</span>
+                                </div>
+
+                                <div class="mb-4">
+                                    <label class="form-label small fw-bold d-flex justify-content-between">
+                                        <span>Độ tươi ngon</span>
+                                        <span>92% (Rất tốt)</span>
+                                    </label>
+                                    <div class="progress rounded-pill" style="height: 10px;">
+                                        <div class="progress-bar bg-success" role="progressbar" style="width: 92%;"></div>
+                                    </div>
+                                </div>
+
+                                <h5 class="fw-bold mb-2">Giá trị dinh dưỡng (mỗi 100g)</h5>
+                                <div class="table-responsive mb-4">
+                                    <table class="table table-bordered table-sm text-center mb-0">
+                                        <thead class="table-light">
+                                            <tr>
+                                                <th>Calo</th>
+                                                <th>Protein</th>
+                                                <th>Carbs</th>
+                                                <th>Chất béo</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>18 kcal</td>
+                                                <td>0.9g</td>
+                                                <td>3.9g</td>
+                                                <td>0.2g</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                                <div class="accordion" id="infoAccordion">
+                                    <div class="accordion-item">
+                                        <h2 class="accordion-header">
+                                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapsePreserve">
+                                                Cách bảo quản tốt nhất
+                                            </button>
+                                        </h2>
+                                        <div id="collapsePreserve" class="accordion-collapse collapse show" data-bs-parent="#infoAccordion">
+                                            <div class="accordion-body text-muted small">
+                                                Bảo quản ngăn mát tủ lạnh (4-6°C), tránh để chung với táo chuối vì làm nhanh chín.
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="accordion-item">
+                                        <h2 class="accordion-header">
+                                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseRecipe">
+                                                Gợi ý các món ăn
+                                            </button>
+                                        </h2>
+                                        <div id="collapseRecipe" class="accordion-collapse collapse" data-bs-parent="#infoAccordion">
+                                            <div class="accordion-body text-muted small">
+                                                <ul>
+                                                    <li>Canh cà chua nấu trứng</li>
+                                                    <li>Salad sốt mè rang</li>
+                                                    <li>Nước ép cà chua tươi</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Calorie calculator form -->
+                        <div class="card card-premium p-4">
+                            <h4 class="fw-bold mb-3 d-flex align-items-center gap-2">
+                                <i class="bi bi-calculator text-success"></i> Tính Calo theo khối lượng (Tùy chỉnh)
+                            </h4>
+                            <form>
+                                <div class="mb-3">
+                                    <label class="form-label fw-bold small">Tên rau củ</label>
+                                    <input type="text" id="calName" class="form-control rounded-3" value="Cà chua chín" placeholder="Ví dụ: Cà chua, Khoai tây...">
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label fw-bold small">Khối lượng (gam)</label>
+                                    <input type="number" id="calWeight" class="form-control rounded-3" value="150" min="1" placeholder="Nhập khối lượng">
+                                </div>
+                                <button type="button" id="btnCalcDemo" class="btn btn-success w-100 py-2.5 rounded-pill fw-bold">Tính toán Calo</button>
+                            </form>
+                            <div id="calCalcResult" class="alert alert-info d-none mt-3 mb-0" role="alert">
+                                <strong>150g Cà chua chín</strong> chứa khoảng <strong>27 Calo</strong>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- Offcanvas Mobile Navigation -->
+    <div class="offcanvas offcanvas-start" tabindex="-1" id="mobileSidebar" aria-labelledby="mobileSidebarLabel">
+        <div class="offcanvas-header border-bottom">
+            <h5 class="offcanvas-title fw-bold" id="mobileSidebarLabel" style="color: var(--primary);">VEG-AI</h5>
+            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body p-0">
+            <div class="sidebar" style="width: 100%; border: none;">
+                <div class="sidebar-header d-flex align-items-center gap-2">
+                    <i class="bi bi-camera-fill fs-4 text-success"></i>
+                    <span class="fw-bold small text-success">VEG-AI PERSONAL</span>
+                </div>
+                <div class="sidebar-menu">
+                    <a href="dashboard.html" class="sidebar-link"><i class="bi bi-grid-1x2"></i>Tổng quan dinh dưỡng</a>
+                    <a href="scan.html" class="sidebar-link active"><i class="bi bi-camera"></i>Nhận diện AI</a>
+                    <a href="reports.html" class="sidebar-link"><i class="bi bi-journal-text"></i>Bữa ăn hàng ngày</a>
+                    <a href="recipes.html" class="sidebar-link"><i class="bi bi-search"></i>Trợ lý ẩm thực</a>
+                    <a href="chat.html" class="sidebar-link"><i class="bi bi-chat-dots"></i>AI Chuyên gia</a>
+                    <hr>
+                    <a href="#" class="sidebar-link btn-logout-trigger"><i class="bi bi-box-arrow-right"></i>Đăng xuất</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../assets/js/app.js"></script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            // Action mock scans
+            document.getElementById("btnMockScan").addEventListener("click", function() {
+                document.getElementById("aiEmptyState").classList.add("d-none");
+                document.getElementById("aiResultState").classList.remove("d-none");
+            });
+
+            // Dynamic Calorie Calculator
+            document.getElementById("btnCalcDemo").addEventListener("click", function() {
+                const name = document.getElementById("calName").value.trim() || "Rau củ";
+                const weightVal = parseFloat(document.getElementById("calWeight").value) || 0;
+                
+                const lowerName = name.toLowerCase();
+                let calPerGram = 0.3; // default rate
+                if (lowerName.includes("cà chua") || lowerName.includes("tomato")) {
+                    calPerGram = 0.18;
+                } else if (lowerName.includes("bông cải") || lowerName.includes("broccoli") || lowerName.includes("súp lơ")) {
+                    calPerGram = 0.34;
+                } else if (lowerName.includes("khoai tây") || lowerName.includes("potato")) {
+                    calPerGram = 0.77;
+                } else if (lowerName.includes("cà rốt") || lowerName.includes("carrot")) {
+                    calPerGram = 0.41;
+                }
+                
+                const calResult = Math.round(weightVal * calPerGram);
+                const resultBox = document.getElementById("calCalcResult");
+                resultBox.innerHTML = `<strong>${weightVal}g ${name}</strong> chứa khoảng <strong>${calResult} Calo</strong>`;
+                resultBox.classList.remove("d-none");
+            });
+        });
+    </script>
+</body>
+</html>
